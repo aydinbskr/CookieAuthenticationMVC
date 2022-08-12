@@ -16,6 +16,9 @@ namespace CookieAuthenticationMVC.Controllers
 
         public IActionResult Index()
         {
+            //var name = User.Claims.Where(x => x.Type == "FavoriteDrink").FirstOrDefault().Value;
+            //var name = User.Claims.Where(x => x.Type == ClaimTypes.Name).FirstOrDefault().Value;
+            var claims = User.Claims;
             return View();
         }
         [Authorize]

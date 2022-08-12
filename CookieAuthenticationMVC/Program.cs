@@ -5,7 +5,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(x => x.LoginPath = "/account/login");
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/account/login";
+                    options.LogoutPath= "/account/logout";
+                    options.ExpireTimeSpan = TimeSpan.FromSeconds(10);
+                    options.Cookie.MaxAge = options.ExpireTimeSpan;
+                    options.SlidingExpiration = true;
+                });
+                
 
 var app = builder.Build();
 
